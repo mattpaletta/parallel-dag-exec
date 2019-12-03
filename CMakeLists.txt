@@ -45,6 +45,3 @@ target_link_libraries(test_dag dag Catch2::Catch2)
 
 add_executable(test_graph app/test_graph.cpp)
 target_link_libraries(test_graph dag Catch2::Catch2)
-
-add_executable(test_jobserver app/test_jobserver.cpp)
-target_link_libraries(test_jobserver dag Catch2::Catch2)
