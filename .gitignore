@@ -1,3 +1,8 @@
+compile_commands.json
+build/
+**/*.DS_Store
+**/*.swp
+
 # Prerequisites
 *.d
 
