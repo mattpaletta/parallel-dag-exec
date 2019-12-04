@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.10)
 
 project(parallel-dag-exec LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
@@ -34,8 +34,13 @@ if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 endif()
 
+set(Boost_USE_MULTITHREADED OFF)
+find_package(Boost 1.67 REQUIRED)
+find_package(Threads REQUIRED)
+
 include_directories(.)
 add_library(dag include/graph.hpp include/node.hpp lib/jobserver.cpp include/jobserver.hpp)
+target_link_libraries(dag Boost::boost Threads::Threads)
 SET_TARGET_PROPERTIES(dag PROPERTIES LINKER_LANGUAGE CXX)
 
 find_package(Catch2 CONFIG REQUIRED)
