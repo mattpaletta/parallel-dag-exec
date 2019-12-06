@@ -57,7 +57,7 @@ matrix:
       env:
         - MATRIX_EVAL="brew install cmake"
 install:
-  - git clone --depth 1 https://github.com/catchorg/Catch2.git && cd Catch2 && cmake -Bbuild -H. -DBUILD_TESTING=OFF && sudo cmake --build build/ --target install
+  - git clone --depth 1 https://github.com/catchorg/Catch2.git && cd Catch2 && cmake -Bbuild -H. -DBUILD_TESTING=OFF && cmake --build build/ --target install
   - cd $TRAVIS_BUILD_DIR && mkdir build && cd build && cmake .. && cmake --build .
 script:
   - ./test_graph
