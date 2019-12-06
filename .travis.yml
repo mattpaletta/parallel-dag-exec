@@ -16,18 +16,18 @@ matrix:
           - clang
           - boost1.69
           - cmake
-     - env: COMPILER=clang BUILD=Release
-       compiler: clang
-       addons:
-         apt:
-           update: true
-         sources:
-           - sourceline: 'ppa:mhier/libboost-latest'
-           - ubuntu-toolchain-r-test
-         packages:
-           - clang
-           - boost1.69
-           - cmake
+    - env: COMPILER=clang BUILD=Release
+      compiler: clang
+      addons:
+        apt:
+          update: true
+        sources:
+          - sourceline: 'ppa:mhier/libboost-latest'
+          - ubuntu-toolchain-r-test
+        packages:
+          - clang
+          - boost1.69
+          - cmake
     - env: COMPILER=g++ BUILD=Debug STANDARD=17
       compiler: gcc
       addons:
@@ -40,22 +40,22 @@ matrix:
           - g++
           - boost1.69
           - cmake
-     - env: COMPILER=g++ BUILD=Release STANDARD=17
-       compiler: gcc
-       addons:
-         apt:
-           update: true
-         sources:
-           - sourceline: 'ppa:mhier/libboost-latest'
-           - ubuntu-toolchain-r-test
-         packages:
-           - g++
-           - boost1.69
-           - cmake
-     - os: osx
-       osx_image: xcode10.1
-       env:
-         - MATRIX_EVAL="brew install cmake"
+    - env: COMPILER=g++ BUILD=Release STANDARD=17
+      compiler: gcc
+      addons:
+        apt:
+          update: true
+        sources:
+          - sourceline: 'ppa:mhier/libboost-latest'
+          - ubuntu-toolchain-r-test
+        packages:
+          - g++
+          - boost1.69
+          - cmake
+    - os: osx
+      osx_image: xcode10.1
+      env:
+        - MATRIX_EVAL="brew install cmake"
 install:
   - git clone --depth 1 https://github.com/catchorg/Catch2.git && cd Catch2 && cmake -Bbuild -H. -DBUILD_TESTING=OFF && sudo cmake --build build/ --target install
   - cd $TRAVIS_BUILD_DIR && mkdir build && cd build && cmake .. && cmake --build .
