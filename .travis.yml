@@ -14,7 +14,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - clang
-            - libboost1.67-all-dev
+            - libboost-all-dev
             - cmake
     - env: COMPILER=clang BUILD=Release
       compiler: clang
@@ -26,7 +26,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - clang
-            - libboost1.67-all-dev
+            - libboost-all-dev
             - cmake
     - env: COMPILER=g++ BUILD=Debug STANDARD=17
       compiler: gcc
@@ -38,7 +38,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++
-            - libboost1.67-all-dev
+            - libboost-all-dev
             - cmake
     - env: COMPILER=g++ BUILD=Release STANDARD=17
       compiler: gcc
@@ -50,7 +50,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++
-            - libboost1.67-all-dev
+            - libboost-all-dev
             - cmake
     - os: osx
       osx_image: xcode10.1
