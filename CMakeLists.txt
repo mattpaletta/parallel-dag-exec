@@ -35,7 +35,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
 endif()
 
 set(Boost_USE_MULTITHREADED OFF)
-find_package(Boost 1.67 REQUIRED)
+find_package(Boost 1.65 REQUIRED)
 find_package(Threads REQUIRED)
 
 include_directories(.)
