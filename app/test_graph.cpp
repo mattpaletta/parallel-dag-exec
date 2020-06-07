@@ -8,7 +8,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include "include/graph.hpp"
+#include "graph.hpp"
 
 TEMPLATE_TEST_CASE("contains empty", "[graph]", int, long, double, std::string) {
 	const Graph<TestType> g;

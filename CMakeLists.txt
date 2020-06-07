@@ -34,19 +34,22 @@ if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 endif()
 
-set(Boost_USE_MULTITHREADED OFF)
-find_package(Boost 1.65 REQUIRED)
 find_package(Threads REQUIRED)
 
-include_directories(.)
-add_library(dag include/graph.hpp include/node.hpp lib/jobserver.cpp include/jobserver.hpp)
-target_link_libraries(dag Boost::boost Threads::Threads)
-SET_TARGET_PROPERTIES(dag PROPERTIES LINKER_LANGUAGE CXX)
+file(GLOB INC_FILES include/*.hpp)
+file(GLOB SRC_FILES lib/*.cpp)
+add_library(dag STATIC ${INC_FILES} ${SRC_FILES})
+target_include_directories(dag PUBLIC include)
+target_link_libraries(dag Threads::Threads)
+
+enable_testing()
 
 find_package(Catch2 CONFIG REQUIRED)
 
 add_executable(test_dag app/test_dag.cpp)
 target_link_libraries(test_dag dag Catch2::Catch2)
+add_test(dag test_dag)
 
 add_executable(test_graph app/test_graph.cpp)
 target_link_libraries(test_graph dag Catch2::Catch2)
+add_test(graph test_graph)

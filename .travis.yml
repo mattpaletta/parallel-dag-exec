@@ -11,11 +11,9 @@ matrix:
         apt:
           update: true
           sources:
-            - sourceline: 'ppa:mhier/libboost-latest'
             - ubuntu-toolchain-r-test
           packages:
             - clang
-            - libboost-all-dev
             - cmake
     - env: COMPILER=clang BUILD=Release
       compiler: clang
@@ -24,11 +22,9 @@ matrix:
         apt:
           update: true
           sources:
-            - sourceline: 'ppa:mhier/libboost-latest'
             - ubuntu-toolchain-r-test
           packages:
             - clang
-            - libboost-all-dev
             - cmake
     - env: COMPILER=g++ BUILD=Debug STANDARD=17
       compiler: gcc
@@ -37,11 +33,9 @@ matrix:
         apt:
           update: true
           sources:
-            - sourceline: 'ppa:mhier/libboost-latest'
             - ubuntu-toolchain-r-test
           packages:
             - g++
-            - libboost-all-dev
             - cmake
     - env: COMPILER=g++ BUILD=Release STANDARD=17
       compiler: gcc
@@ -50,22 +44,23 @@ matrix:
         apt:
           update: true
           sources:
-            - sourceline: 'ppa:mhier/libboost-latest'
             - ubuntu-toolchain-r-test
           packages:
             - g++
-            - libboost-all-dev
             - cmake
     - os: osx
       osx_image: xcode10.1
       env:
-        - MATRIX_EVAL="brew install cmake boost"
+        - MATRIX_EVAL="brew install cmake"
 install:
   - git clone --depth 1 https://github.com/catchorg/Catch2.git && cd Catch2 && cmake -Bbuild -H. -DBUILD_TESTING=OFF && sudo -E cmake --build build/ --target install
-  - cd $TRAVIS_BUILD_DIR && mkdir build && cd build && cmake .. && cmake --build .
+  - cd $TRAVIS_BUILD_DIR
+  - mkdir build
+  - cd build
+  - cmake ..
+  - cmake --build .
 script:
-  - ./test_graph
-  - ./test_dag
+  - ctest
 
 notifications:
   email:

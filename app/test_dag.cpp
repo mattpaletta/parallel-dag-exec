@@ -9,7 +9,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include "include/jobserver.hpp"
+#include "jobserver.hpp"
 
 TEST_CASE("no tasks", "[jobserver]") {
 	JobServer j;
@@ -44,16 +44,27 @@ void order_of_operations(std::size_t size) {
 	JobServer j;
 	std::atomic<int> result{0};
 	// Explicitly do: 3 + 6 x (5 + 4) / 3 - 7
-	j.add_task([&result]{ result = 5 + 4; }, 0);
-	j.add_task([&result]{ result = 6 * result; }, 1);
+	j.add_task([&result]{
+        result = 5 + 4;
+	}, 0);
+	j.add_task([&result]{
+        result = 6 * result;
+	}, 1);
 	j.depends_on(1, 0);
-	j.add_task([&result]{ result = result / 3; }, 2);
+	j.add_task([&result]{
+        result = result / 3;
+	}, 2);
 	j.depends_on(2, 1);
-	j.add_task([&result]{ result = result + 3; }, 3);
+	j.add_task([&result]{
+        result = result + 3;
+	}, 3);
 	j.depends_on(3, 2);
-	j.add_task([&result]{ result = result - 7; }, 4);
+	j.add_task([&result]{
+        result = result - 7;
+	}, 4);
 	j.depends_on(4, 3);
 	j.run(size);
+
 	CHECK(result == 14);
 }
 
